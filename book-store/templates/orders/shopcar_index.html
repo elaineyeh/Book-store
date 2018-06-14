@@ -1,0 +1,43 @@
+{% extends 'layout_order.html' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col">
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'orders:paid' %}" class="btn btn-success float-right">結帳</a>
+      {% endif %}
+      <h1>購物車</h1>
+      <hr>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">書籍</th>
+            <th scope="col">金額</th>
+            <th scope="col">數量</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for shopcar in shopcars %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>
+                <a href="{% url 'books:show' shopcar.book.id %}">{{ shopcar.book.title }}</a>
+              </td>
+              <td>{{ shopcar.book.price }}</td>
+              <td>{{ shopcar.count }}</td>
+              <td>
+                <a href="{% url 'orders:shopcars_delete' shopcar.book.id %}" class="btn btn-sm btn-outline-danger">移除</a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5" class="text-center">沒有任何品項，<a href="{% url 'books:index' %}">逛一逛</a>吧～</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}

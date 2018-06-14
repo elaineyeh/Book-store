@@ -1,0 +1,27 @@
+{% extends 'layout_user.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+  <h1>註冊會員資料</h1>
+  <hr>
+{% endblock %}
+
+{% block body %}
+<br>
+    <div class="row">
+        <div class="col">
+          <form action="" method="post" class="form">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              {% buttons %}
+                <button type="submit" class="btn btn-primary" style="float:left">
+                  儲存
+                </button>
+              {% endbuttons %}
+          </form>
+          &nbsp;&nbsp;
+          <a class="btn btn-outline-secondary" href="{% url 'books:index' %}" role="button">取消</a>
+        </div>
+    </div>
+{% endblock %}

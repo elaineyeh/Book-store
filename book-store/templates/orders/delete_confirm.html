@@ -1,0 +1,22 @@
+{% extends 'layout_order.html' %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-6 offset-3">
+      <h1>{{title}}</h1>
+      <hr>
+      <form action="" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button type="submit" class="btn btn-primary float-right">
+            刪除
+          </button>
+        {% endbuttons %}
+      </form>
+      <a class="btn btn-secondary float-right mr-2" href="{% url 'orders:shopcars' %}">取消</a>
+    </div>
+  </div>
+{% endblock %}

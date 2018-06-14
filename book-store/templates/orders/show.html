@@ -1,0 +1,34 @@
+{% extends 'layout_order.html' %}
+
+{% block body %}
+  <div class="row">
+    <div class="col">
+      <h1>訂單資訊</h1>
+      <hr>
+      <p>訂單編號：{{ order.id }}</p>
+      <p>建立日期：{{ order.buy_time }}</p>
+      <p>結帳日期：{{ order.paid_time }}</p>
+
+      <p>品項：</p>
+      <table>
+          {% for detail in details %}
+            <tr>
+            <td width="900">{{ detail.book.title }}</td><td>{{ detail.count }} 本</td>
+            </tr>
+          {% endfor %}
+
+      </table>
+      <br>
+
+      {% if order.ship %}
+        <p>訂單狀態：已出貨</p>
+      {% else %}
+        <p>訂單狀態：未出貨</p> 
+      {% endif %}
+      
+
+      <p>總額：{{ total }} 元</p>
+      <a href="{% url 'orders:index' %}" class="btn btn-outline-secondary float-right">回列表</a>
+    </div>
+  </div>
+{% endblock %}

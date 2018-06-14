@@ -1,0 +1,29 @@
+{% extends 'layout_order.html' %}
+
+{% load bootstrap4 %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-6 offset-3">
+      <h1>結帳確認</h1>
+      <hr>
+      品項：
+      <ul>
+        {% for detail in details %}
+          <li>{{ detail.book.title }}：{{ detail.count }} 本</li>
+        {% endfor %}
+      </ul>
+      <p>總額：{{ total }} 元</p>
+      <form action="" method="post" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+          <button type="submit" class="btn btn-primary float-right">
+            結帳
+          </button>
+        {% endbuttons %}
+      </form>
+      <a class="btn btn-secondary float-right mr-2" href="{% url 'orders:shopcars' %}">取消</a>
+    </div>
+  </div>
+{% endblock %}

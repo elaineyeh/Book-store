@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+
+{% load books %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-12 col-sm-4 mb-3">
+      <img src="{{book.image.url}}" class="img-fluid mb-3" alt="Book image">
+
+      <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#order-book-modal">
+        加入購物車
+      </button>
+
+      <div class="modal fade" id="order-book-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">購買數量</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                {% load bootstrap4 %}
+
+                <form action="{% url 'books:order' book.id %}" method="post" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                      <button type="submit" class="btn btn-primary">
+                        購買
+                      </button>
+                    {% endbuttons %}
+                  </form>                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-8">
+      <h1>{{ book.get_title }}</h1>
+      <hr>
+      <dl class="row">
+        <dt class="col-3">書名</dt>
+        <dd class="col-9">
+          {{book.title}}
+        </dd>
+        <dt class="col-3">作者</dt>
+        <dd class="col-9">
+          {% autoescape off %}
+            {{ book.authors.all | build_links:'authors' | join:', '}}
+          {% endautoescape %}
+        </dd>
+        <dt class="col-3">價格</dt>
+        <dd class="col-9">{{ book.price }} 元</dd>
+        <dt class="col-3">分類</dt>
+        <dd class="col-9">
+          <a href="{% url 'books:index' %}?category={{ book.category.id }}">{{ book.category.name }}</a>
+        </dd>
+        <dt class="col-3">標籤</dt>
+        <dd class="col-9">
+          {% autoescape off %}
+            {{ book.tags.all | build_links:'tags' | join:', '}}
+          {% endautoescape %}
+        </dd>
+        <dt class="col-3">出版社</dt>
+        <dd class="col-9">
+          <a href="{% url 'books:index' %}?publisher={{ book.publisher.id }}">{{ book.publisher.name }}</a>
+        </dd>
+        <dt class="col-3">庫存量</dt>
+        <dd class="col-9">剩餘 {{ book.count }} 本</dd>
+      </dl>
+      <hr>
+      <p>{{ book.description | linebreaks }}</p>
+    </div>
+  </div>
+{% endblock %}

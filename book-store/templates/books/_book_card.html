@@ -1,0 +1,10 @@
+<div class="col-6 col-md-4">
+    <a href="{% url 'books:show' book.id %}"><img class="card-img-top" src="{{book.image.url}}" alt="Card image cap" width="2220" height="320"></a>
+    <div class="card-title">
+      <h5 class="card-text text-truncate">{{ book.title }}</h5>
+    </div> 
+    <div class="card-body">
+      <p class="card-text text-truncate">{{ book.description }}</p>
+      <a href="{% url 'books:show' book.id %}" class="btn btn-primary">看更多...</a>
+    </div>
+</div>

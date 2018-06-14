@@ -1,0 +1,22 @@
+<div class="modal fade" id="book-filter-modal" tabindex="-1" role="dialog" aria-labelledby="book-filter-modal-title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">書籍進階搜尋</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% load bootstrap4 %}
+        <form action="" method="get" class="form">
+          {% csrf_token %} {% bootstrap_form form %} {% buttons %}
+          <button type="submit" class="btn btn-primary">
+            搜尋
+          </button>
+          {% endbuttons %}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
