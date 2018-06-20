@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
 
-from accounts.views import register, edit, registration
+from accounts.views import register, edit
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -29,7 +29,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', register, name='register'),
-    path('registration/', registration, name='registration'),
     path('edit/', edit, name='edit'),
     path('accounts/', include('accounts.urls')),
     path('orders/', include('orders.urls')),

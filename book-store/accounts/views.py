@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.template.loader import get_template
 from django.template import loader
 
+from django.contrib import messages as m
 from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from .forms import UserForm
 # from django.contrib.auth.models import User  引入 Django 套件抓使用者資料
 # from django.contrib.auth import get_user_model  如果自己有改 Ｍodel 可以使用這個來抓使用者資訊
 
@@ -12,11 +14,14 @@ from .forms import UserModelForm
 
 
 def register(request):
-    form = UserCreationForm(request.POST or None)
+    # form = UserCreationForm(request.POST or None)
+    form = UserForm(request.POST or None)
+
     if form.is_valid():
         user = form.save()
+        # print(user.email) Check user email is saved
         login(request, user)
-        return redirect(reverse('registration'))
+        return redirect(reverse('books:index'))
 
     return render(request, 'registration/form.html', {'form':form})
 
@@ -30,12 +35,3 @@ def edit(request):
             user = form.save()
             return redirect(reverse('books:index'))
     return render(request, 'registration/edit_form.html', {'form':form})
-
-def registration(request):
-    if request.user.is_authenticated:
-        form = UserModelForm(request.POST or None, instance=request.user)
-
-        if form.is_valid():
-            user = form.save()
-            return redirect(reverse('books:index'))
-    return render(request, 'registration/registration_form.html', {'form':form})
