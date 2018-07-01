@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
 from django.contrib.auth import views as auth_views
 
 from accounts.views import register, edit
@@ -23,7 +24,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
+# def root(x):
+#     return redirect('books:index')
+
+
 urlpatterns = [
+    path('', lambda x: redirect('books:index'), name='root'),
     path('admin/', admin.site.urls),
     path('books/', include('books.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),

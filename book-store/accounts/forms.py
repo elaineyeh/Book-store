@@ -3,12 +3,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from .models import Profile
 User = get_user_model()
 
 class UserModelForm(ModelForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name')
+
 
 class UserForm(UserCreationForm): # class <ClassName>(parent):
     email = EmailField(
@@ -34,3 +36,9 @@ class UserForm(UserCreationForm): # class <ClassName>(parent):
         model = User
         fields = ("username", "email", "first_name", "last_name")
         field_classes = {'username': UsernameField}
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('phone', 'address')
