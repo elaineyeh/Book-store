@@ -28,7 +28,7 @@
               <td>{{ shopcar.book.price }}</td>
               <td>{{ shopcar.count }}</td>
               <td>
-                <a href="{% url 'orders:shopcars_delete' shopcar.book.id %}" class="btn btn-sm btn-outline-danger">移除</a>
+                <a href="{% url 'orders:shopcars_delete' shopcar.book.id %}" class="btn btn-sm btn-outline-danger" style="width:50px;">移除</a>
               </td>
             </tr>
           {% empty %}
