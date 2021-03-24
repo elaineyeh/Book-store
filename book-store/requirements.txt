@@ -50,7 +50,7 @@ python-jwt==2.0.1
 pytz==2018.9
 requests==2.11.1
 requests-toolbelt==0.7.0
-rsa==4.0
+rsa==4.1
 simplegeneric==0.8.1
 six==1.12.0
 sseclient-py==1.7
