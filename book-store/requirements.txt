@@ -43,7 +43,7 @@ pyasn1==0.4.5
 pyasn1-modules==0.2.4
 pycparser==2.19
 pycryptodome==3.4.3
-Pygments==2.2.0
+Pygments==2.7.4
 pylint==2.3.1
 Pyrebase==3.0.27
 python-jwt==2.0.1
