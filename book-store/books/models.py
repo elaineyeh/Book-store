@@ -59,7 +59,7 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='使用者')
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='類別')
     title = models.CharField('書名', max_length=64)
     publisher = models.ForeignKey(Publisher, on_delete=models.PROTECT, verbose_name='出版商')
     price = models.PositiveIntegerField('價錢')
