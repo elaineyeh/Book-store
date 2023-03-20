@@ -12,7 +12,7 @@ jobs:
 
       - run: echo $CIRCLE_PROJECT_REPONAME
       - run:
-          command: ssh -o StrictHostKeyChecking=no -i "~/.ssh/id_rsa" $USER@$HOST < deploy.sh
+          command: ssh -o StrictHostKeyChecking=no -i "~/.ssh/id_rsa" $USER@$HOST < ./book-store/deploy.sh
 
 workflows:
   build-and-test:
