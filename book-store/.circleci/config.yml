@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build-and-test:
+    docker:
+      - image: cimg/python:3.7
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - ""
+
+      - run: echo $CIRCLE_PROJECT_REPONAME
+      - run:
+          command: ssh -o StrictHostKeyChecking=no -i "~/.ssh/id_rsa" $USER@$HOST < deploy.sh
+
+workflows:
+  build-and-test:
+    jobs:
+      - build-and-test:
+          filters:
+            branches:
+              only:
+                master
