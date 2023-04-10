@@ -11,18 +11,24 @@
     <br>
     <div class="row">
         <div class="col">
-                <form action="" method="post" class="form">
-                    {% csrf_token %}
-                    {% bootstrap_form form %}
-                    <a href="{% url 'register' %}" class="mb-2">還沒有加入會員嗎?</a>
-                    <br>
-                    <a href="{% url 'accounts:password_reset' %}" class="mb-2">忘記密碼?</a>
-                    {% buttons %}
-                      <button type="submit" class="btn btn-primary">
-                        登入
-                      </button>
-                    {% endbuttons %}
-                  </form>
+            {% if context|length > 1 %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                  <button class="close" type="button" data-dismiss="alert" aria-label="close">×</button>
+                    {{ context }}
+              </div>
+            {% endif %}
+            <form action="" method="post" class="form">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <a href="{% url 'register' %}" class="mb-2">還沒有加入會員嗎?</a>
+                <br>
+                <a href="{% url 'accounts:password_reset' %}" class="mb-2">忘記密碼?</a>
+                {% buttons %}
+                  <button type="submit" class="btn btn-primary">
+                    登入
+                  </button>
+                {% endbuttons %}
+              </form>
         </div>
     </div>
 {% endblock %}

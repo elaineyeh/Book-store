@@ -38,14 +38,12 @@
                                         <a class="nav-link" href="{% url 'register' %}">註冊<span class="sr-only">(current)</span></a>
                                     {% endif %}
                                 </li>
-                                {% if request.user.is_authenticated %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'orders:shopcars' %}">購物車</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'orders:index' %}">訂單</a>
                                 </li>
-                                {% endif %}
                           </ul>
  
                           <form class="form-inline my-2 my-lg-0" action="{% url 'books:index' %}">
