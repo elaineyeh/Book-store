@@ -1,0 +1,111 @@
+<html>
+{% load static %}
+
+<meta charset="UTF-8">
+    <style>
+        body {
+            color:#222;
+            line-height:1.5;
+        }
+
+        table {
+            width:100%;
+            border-spacing:0;
+            border-collapse: collapse;
+            margin:20px 0;
+            table-layout: fixed;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            font-size:14px;
+            padding:3px;
+            margin:0;
+        }
+
+        tbody tr:nth-child(odd) {
+            background:#efefef;
+            overflow: hidden;
+            display: block;
+        }
+
+        thead th, tbody tr.total {
+            background:#5993bb;
+            color:#fff;
+            font-weight:bold;
+        }
+
+        h1 {
+            margin:0;
+            font-size:36px;
+        }
+
+        h3 {
+            margin:0;
+            font-size:20px;
+        }
+        
+        .book_title {
+            width: 70%;
+            text-align:left;
+            overflow: hidden;
+            max-width: 0;
+        }
+
+        .num {
+            width: 10%;
+            text-align:center;
+        }
+
+        .total {
+            text-align:left;
+        }
+    </style>
+    <body>
+        <h1>Book Store</h1>
+        <p>
+            Invoice no. {{ order.id }}<br>
+            <span>
+                {{ order.buy_time|date:"M d, Y" }}
+            </span>
+        </p>
+
+        <h3>Bill</h3>
+        <p>
+            {{ order.buyer.first_name }} {{ order.buyer.last_name}}<br>
+            {{ order.buyer.email }}<br>
+        </p>
+
+        <h3>Items bought</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                </tr>
+            </htead>
+            <tbody>
+                {% for item in order.items.all %}
+                    <tr>
+                        <td class="book_title">
+                            {% if item.book.title|length > 30 %}
+                                {{ item.book.title|make_list|slice:'0:30'|join:''|add:' ...' }}
+                            {% else %}
+                                {{ item.book.title}}
+                            {% endif %}
+                        </td>
+                        <td class="num">{{ item.book.price }}</td>
+                        <td class="num">{{ item.count }}</td>
+                        <td class="num">{{ item.get_cost }}</td>
+                    </tr>
+                {% endfor %}
+                <tr class="total">
+                    <td colspan="3">Total</td>
+                    <td class="num">$ {{ order.get_total_cost }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

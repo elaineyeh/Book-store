@@ -27,4 +27,5 @@ urlpatterns = [
     path('shopcars/<int:pk>/delete/',
          v.shopcar_delete,
          name='shopcars_delete'), #刪除某項訂單
+    path('<int:pk>/pdf/', v.order_pdf, name='order_pdf'),
 ]

@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages as m
 from django.utils import timezone
+from django.template.loader import render_to_string
 
 from .forms import DeleteConfirmForm
 
@@ -12,6 +13,7 @@ from books.filters import BookFilter
 
 from .models import Order, OrderDetail
 from .forms import PaidConfirmForm
+from .utils import render_to_pdf
 
 
 @login_required
@@ -99,3 +101,12 @@ def shopcar_delete(request, pk):
         'form': form,
         'title': '移除購物車'
     })
+
+
+def order_pdf(request, pk):
+    order = get_object_or_404(Order, id=pk)
+    data = {
+        'order': order,
+    }
+    pdf = render_to_pdf('orders/pdf.html', data)
+    return HttpResponse(pdf, content_type='application/pdf')

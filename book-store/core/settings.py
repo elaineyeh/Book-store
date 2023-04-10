@@ -14,6 +14,7 @@ import os
 import environ
 
 from django.conf import settings
+from pathlib import Path
 
 env = environ.Env()
 environ.Env.read_env()
@@ -21,6 +22,8 @@ environ.Env.read_env()
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # /Users/awesome/Documents/Book-store/book-store
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+PROJECT_PATH = Path(os.path.realpath(os.path.dirname(__file__))).parent
 
 
 # Quick-start development settings - unsuitable for production
