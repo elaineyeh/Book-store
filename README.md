@@ -5,7 +5,7 @@
 ### Prerequisites
 
 git >= 2.32.0
-python >= 3.7.5
+python >= 3.10.8
 
 ### Setting Up the Environment for Development
 
